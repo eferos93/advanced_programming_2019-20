@@ -5,7 +5,7 @@
 // struct array;
 
 int main() {
-  std::array<int, 4> a{1, 2, 3, 4};
+  std::array<int, 4> a{1, 2, 3, 4}; //static arrays; located in the STACK
   std::array<int, 4> b{a};  // I can copy element-wise from another std::array
                             // this is not possible with plain built-in arrays
   b = a;
@@ -17,7 +17,7 @@ int main() {
     std::cout << x << " ";
   std::cout << std::endl;
 
-  a[0] = 0;  // same subscripting operator without bound checking
+  a[0] = 0;  // same subscripting operator without bound checking at runtime
 
   for (const auto x : a)
     std::cout << x << " ";
@@ -27,7 +27,7 @@ int main() {
     std::cout << x << " ";
   std::cout << std::endl;
 
-  for (auto& x : a)
+  for (auto& x : a) //difference?
     x *= 10;
 
   for (auto i = 0u; i < a.size(); ++i)
