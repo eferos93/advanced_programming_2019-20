@@ -5,7 +5,7 @@
 
 template <class T>
 auto init(const std::size_t l) {
-  return new T[l]{};
+  return new T[l]{}; //{} array is initialized to zero
 }
 
 #else
@@ -17,12 +17,15 @@ T* init(const std::size_t l) {
 
 #endif
 
+template <class T>
+void debug(T);
+
 int main() {
   auto b = true;          // a bool
   auto ch = 'x';          // a char
   auto i = 123;           // an int
   auto d = 1.2;           // a double
-  auto z = std::sqrt(d);  // z has the type of whatever sqrt(d) returns
+  auto z = std::sqrt(d);  // z has the type of whatever sqrt(d) returns; :: is the scope resolution operator
   auto ui = 0u;           // unsigned int
   auto llui = 0llu;       // long long unsigned int
 
@@ -30,6 +33,8 @@ int main() {
     std::cout << i << std::endl;
 
   auto pb = &b;  // guess what.. How can I know?
+
+  //debug(pb) best way to discover the type of a var
 
   auto ps = init<double>(11);
   delete[] ps;

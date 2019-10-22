@@ -7,13 +7,13 @@ int main() {
   int a{8}, b{7};
   int* pi{&a};
 
-  const int* pc{&a};
-  // *pc = 7; 	// error
+  const int* pc{&a}; //read from right to left: a pointer to integer constant
+  // *pc = 7; 	// error because when you cannot change the value when deferencing it
   a = 15;  // I can obviously change a
 
-  int* const cp{&a};
+  int* const cp{&a}; //you can change the value of referenced, but not the pointer
   a = b;
-  *cp = 33;
+  *cp = 33; 
   // cp = &b;   // error
 
   const int* const cpc{&a};
@@ -30,7 +30,7 @@ int main() {
 
 template <typename T>
 void print_sentinel(const T* a, const std::size_t l) {
-  const T* const end{a + l};
+  const T* const end{a + l}; // points one past the last element of a
   for (; a != end; ++a)
     std::cout << *a << std::endl;
 }
