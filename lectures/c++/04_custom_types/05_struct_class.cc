@@ -2,6 +2,9 @@
 #include <iostream>
 #include <vector>
 
+/**
+ * the only difference between a class and a struct is the default visibility of the fields
+ **/
 struct Point_s {
   double x;
   double y;
@@ -13,7 +16,7 @@ void Point_s::print() {
 }
 
 class Point_c {
-  double x;
+  double x; //default visibility for fields is private
   double y;
 
  public:
