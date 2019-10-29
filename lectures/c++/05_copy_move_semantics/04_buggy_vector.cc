@@ -6,8 +6,9 @@ class Vector {
   std::size_t _size;
 
  public:
+ //explicit forces you to explictly initialize using the constructor
   explicit Vector(const std::size_t length)
-      : elem{new T[length]{}}, _size{length} {}
+      : elem{new T[length]{} }, _size{length} {} //the curly brace after T[length] initializes all the values of the array
 
   ~Vector() { delete[] elem; }
 
@@ -16,7 +17,7 @@ class Vector {
 
   std::size_t size() const { return _size; }
 
-  // range-for
+  // range-for; line 34
   const T* begin() const { return elem; }
   T* begin() { return elem; }
 
@@ -36,6 +37,8 @@ int main() {
   std::cout << std::endl;
 
   Vector<int> v2{v1};  // default copy constructor
+  //creates a new obj v2, copy by value => v2 elem points to the same array pointed by the 
+  //v1 elem (SHALLOW COPY)
 
   std::cout << "v2 after default copy ctor: ";
   for (const auto x : v2)
@@ -56,5 +59,6 @@ int main() {
     std::cout << x << " ";
   std::cout << std::endl;
 
+  //here you get error, cause two free are called for the same mem location
   return 0;
 }
