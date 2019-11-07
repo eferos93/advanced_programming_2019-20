@@ -17,7 +17,7 @@ class Vector {
 
   num& operator[](const std::size_t i) { return elem[i]; }
 
-  // try to comment this line and recompile
+  // try to comment this line and recompile -> compiler error
   const num& operator[](const std::size_t i) const { return elem[i]; }
 };
 

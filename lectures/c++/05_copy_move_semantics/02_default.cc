@@ -16,11 +16,15 @@ int main() {
                             // public)
   // it is called aggregate initialization (see
   // https://en.cppreference.com/w/cpp/language/aggregate_initialization)
+  // 
 
-  S s3{};  // calls {} on each member: S s3 { {}, {}, {} };
+  S s3{};  // calls {} on each member: equivalent to S s3 { {}, {}, {} };
 
-  std::cout << s1.a << "--" << s1.b << "--" << s1.s << "\n";
+  // randomly initialised, empty stgring
+  std::cout << s1.a << "--" << s1.b << "--" << s1.s << "\n"; // empty string, weird values for the integer and double
+  // normal behaviour
   std::cout << s2.a << "--" << s2.b << "--" << s2.s << "\n";
+  // 
   std::cout << s3.a << "--" << s3.b << "--" << s3.s << "\n";
 
   return 0;

@@ -36,7 +36,8 @@ Foo::Foo() {
 Foo::~Foo() {
   std::cout << "dtor\n";
 }
-
+//redefine the operator <<; when we use "<< f0"
+//this is an operator overloading
 std::ostream& operator<<(std::ostream& os, const Foo& f) {
   os << f._i << " " << f._d << " " << f._s << std::endl;
   return os;

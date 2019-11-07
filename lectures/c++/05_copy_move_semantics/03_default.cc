@@ -5,12 +5,15 @@ struct X {
   double b;
   char c = 'a';
   X() = default;  // in-class initializers are used by the constructors
+  //default asks the compiler to use a default constructor
+  //the compiler generated constr will use the value above
 };
 
 struct Y {
   int a = 77;
   double b;
   char c = 'a';
+  //the def constructor, will then, assign 5 to a, b uninitialized, c = 'a' as it is in the in-class init.
   Y() : a{5} {}  // what it is written here wins the in-class initialization
   Y(const Y&) = delete;
 };

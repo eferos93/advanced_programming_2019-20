@@ -26,6 +26,6 @@ class Vector {
 int main() {
   Vector<double> v1{7};
   // Vector<double> v2{v1}; // default copy ctor calls a deleted function by
-  // std::unique_ptr
+  // std::unique_ptr; unique pointer does this, deletes the copy contructor
   return 0;
 }

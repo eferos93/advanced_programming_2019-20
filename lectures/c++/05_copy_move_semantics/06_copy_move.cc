@@ -30,10 +30,10 @@ class Vector {
   /////////////////////////
   // copy semantics
 
-  // copy ctor -- deep copy
+  // copy ctor -- deep copy; takes a const ref of the same type
   Vector(const Vector& v);
 
-  // copy assignment -- deep copy
+  // copy assignment -- deep copy; returns a ref to this obj, so I can chain 
   Vector& operator=(const Vector& v);
   // end of copy semantics
   /////////////////////////
@@ -41,7 +41,9 @@ class Vector {
   /////////////////////////
   // move semantics
 
-  // move ctor
+  // move ctor; better that the classic swap where you COPY values
+  // && is an r-value reference, meaning that it can stay only on the right side of the = sign
+  // 
   Vector(Vector&& v) : _size{std::move(v._size)}, elem{std::move(v.elem)} {
     std::cout << "move ctor\n";
   }
@@ -74,11 +76,11 @@ class Vector {
   T* end() { return &elem[_size]; }
 };
 
-// copy ctor
+// copy ctor; 
 template <typename T>
 Vector<T>::Vector(const Vector& v) : _size{v._size}, elem{new T[_size]} {
   std::cout << "copy ctor\n";
-  std::copy(v.begin(), v.end(), begin());
+  std::copy(v.begin(), v.end(), begin()); //provided in the algorithm header
 }
 
 // copy assignment
@@ -114,7 +116,7 @@ Vector<T> operator+(const Vector<T>& lhs, const Vector<T>& rhs) {
   for (std::size_t i = 0; i < size; ++i)
     res[i] = lhs[i] + rhs[i];
 
-  return res;
+  return res; //return by value, 
 }
 
 template <typename T>
@@ -128,10 +130,10 @@ std::ostream& operator<<(std::ostream& os, const Vector<T>& v) {
 int main() {
   std::cout << "Vector<int> v0; calls\n";
   Vector<int> v0;
-  std::cout << v0.size() << "\n";
+  std::cout << v0.size() << "\n"; //random size
   std::cout << "Vector<int> v00{}; calls\n";
   Vector<int> v00{};
-  std::cout << v00.size() << "\n";
+  std::cout << v00.size() << "\n"; //random size
 
   std::cout << "\nVector<double> v1{5}; calls\n";
   Vector<double> v1{5};
@@ -139,7 +141,7 @@ int main() {
   std::cout << "\nVector<double> v2 = v1; calls\n";
   Vector<double> v2 = v1;
   std::cout << "\nv2 = Vector<double>{7}; calls\n";
-  v2 = Vector<double>{7};
+  v2 = Vector<double>{7}; //Vector<double>{7} will die when the statment is terminated; = however uses move assignment
   std::cout << "\nVector<double> v3{std::move(v1)}; calls\n";
   Vector<double> v3{std::move(v1)};  // now v1 should not be used
   std::cout << "\nv3 = v2; calls\n";
