@@ -56,6 +56,8 @@ class NonDangerousSnake : public Snake {
 
 struct Python : public NonDangerousSnake {};
 
+//like typedef, but using can be templated
+//creates an alias
 using Anaconda = DangerousSnake;
 
 void print_animal(const Animal& a) noexcept {

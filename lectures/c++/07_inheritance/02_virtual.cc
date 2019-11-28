@@ -1,6 +1,9 @@
 #include <ap_error.h>
 #include <iostream>
 
+//in this case Animal is an abstract class
+// if the class is fully abstract 
+// 
 struct Animal {
   unsigned int age;
   double weight;

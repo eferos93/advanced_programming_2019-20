@@ -34,10 +34,13 @@ class Snake : public Animal {
   Snake(const unsigned int a, const double w, const bool b)
       : Animal{a, w}, dangerous{b} {}
   explicit Snake(const bool b) : Animal{}, dangerous{b} {}
+
+
   void info() const noexcept override {
     Animal::info();
     std::cout << "dangerous:\t" << (dangerous ? "true" : "false") << std::endl;
   }
+
   void speak() const noexcept override { std::cout << "ssss\n"; }
 };
 
@@ -63,6 +66,7 @@ void print_animal(const Animal& a) noexcept {
   a.speak();
 
   // dynamic_cast is used to know the real type of the object
+  // if it returns true = > a has type DangerousSnake
   if (dynamic_cast<const DangerousSnake*>(&a))
     std::cout << "call 911...\n";
 }

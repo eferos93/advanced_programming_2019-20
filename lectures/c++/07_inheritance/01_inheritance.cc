@@ -23,6 +23,7 @@ struct Dog : public Animal {
   Dog(const unsigned int a, const double d) : Animal{a, d} {}
 };
 
+//children can access all and only the public attr of Animal
 struct Snake : public Animal {
   bool dangerous;
   Snake(const unsigned int a, const double w, const bool b)

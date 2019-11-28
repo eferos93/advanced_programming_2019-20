@@ -1,5 +1,6 @@
 #include <iostream>
-
+//don't put virtual on deconstructors 
+//
 struct Base {
   Base() { std::cout << "Base\n"; }
   ~Base() { std::cout << "~Base\n"; }
