@@ -18,10 +18,14 @@ struct instrumented_base {
     comparison
   };
 
+  //static variables must be declared once in a cpp file,
+  //not in the hpp file
   static constexpr std::size_t n_ops = 9;
   static double counts[n_ops];
+  //array of strings, old C style
   static const char* counter_names[n_ops];
   static void initialize(std::size_t i) {
+    //resets all the counters to 0.0
     std::fill(counts, counts + n_ops, 0.0);
     counts[n] = i;
   }
@@ -37,6 +41,7 @@ struct instrumented : instrumented_base {
   T value;
   // Conversions from T and to T:
   instrumented(const T& x) : value(x) {}
+  //convertion operator
   explicit operator T() const { return value; }
 
   template <typename U>

@@ -4,7 +4,7 @@
 int main() {
   std::ifstream f{"a_file.txt"};
   std::string word;
-  f >> word;
+  f >> word; // i get the first word from the input file stream
   std::cout << "first read word: " << word << std::endl;
   f >> word;
   std::cout << "second read word: " << word << std::endl;
