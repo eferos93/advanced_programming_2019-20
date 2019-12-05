@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 #include <iostream>
 #include <memory>  //unique_ptr
 #include <iterator>
 #include "ap_error.h"
+=======
+#include "ap_error.h"
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <memory>  //unique_ptr
+#include <vector>
+>>>>>>> 7e90c104ac43c8a79725b69b84791df7716d447d
 
 enum class method { push_back, push_front };
 
@@ -55,20 +64,34 @@ class List {
   template <class O>
   friend std::ostream& operator<<(std::ostream&, const List<O>&);
 
+<<<<<<< HEAD
   template<typename O>
+=======
+  template <typename O>
+>>>>>>> 7e90c104ac43c8a79725b69b84791df7716d447d
   class __iterator;
 
   using iterator = __iterator<T>;
   using const_iterator = __iterator<const T>;
 
+<<<<<<< HEAD
   iterator begin() noexcept {return iterator{head.get()};}
   iterator end() { return iterator{nullptr}; }
   const_iterator begin() const { return const_iterator{head.get()}; }
   const_iterator end() const { return const_iterator{nullptr}; }
+=======
+  iterator begin() noexcept { return iterator{head.get()}; }
+  iterator end() { return iterator{nullptr}; }
+
+  const_iterator begin() const { return const_iterator{head.get()}; }
+  const_iterator end() const { return const_iterator{nullptr}; }
+
+>>>>>>> 7e90c104ac43c8a79725b69b84791df7716d447d
   const_iterator cbegin() const { return const_iterator{head.get()}; }
   const_iterator cend() const { return const_iterator{nullptr}; }
 };
 
+<<<<<<< HEAD
 /**
  * Iterator for the class List
  **/
@@ -110,6 +133,43 @@ class List<T>::__iterator{
       return !(a.curret == b.current);
     }
 
+=======
+template <typename T>
+template <typename O>
+class List<T>::__iterator {
+  using node = typename List<T>::node;
+  node* current;
+
+ public:
+  explicit __iterator(node* x) noexcept : current{x} {}
+
+  using value_type = O;
+  using difference_type = std::ptrdiff_t;
+  using iterator_category = std::forward_iterator_tag;
+  using reference = value_type&;
+  using pointer = value_type*;
+
+  reference operator*() const noexcept { return current->value; }
+  pointer operator->() const noexcept { return &(*(*this)); }
+
+  __iterator& operator++() noexcept {  // pre increment
+    current = current->next.get();
+    return *this;
+  }
+
+  __iterator operator++(int) noexcept {
+    __iterator tmp{current};
+    ++(*this);
+    return tmp;
+  }
+
+  friend bool operator==(const __iterator& a, const __iterator& b) {
+    return a.current == b.current;
+  }
+  friend bool operator!=(const __iterator& a, const __iterator& b) {
+    return !(a == b);
+  }
+>>>>>>> 7e90c104ac43c8a79725b69b84791df7716d447d
 };
 
 template <class T>
@@ -182,6 +242,7 @@ int main() {
 
     std::cout << l << std::endl;
 
+<<<<<<< HEAD
     auto ol = l;
     int a = 9;
     l.insert(14, method::push_front);
@@ -189,6 +250,22 @@ int main() {
 
     std::cout << l << std::endl;
     std::cout << ol << std::endl;
+=======
+    std::vector<int> v(3);
+
+    std::copy(l.cbegin(), l.cend(), v.begin());
+
+    for (auto x : v)
+      std::cout << x << std::endl;
+    return 0;
+    // auto ol = l;
+    // int a = 9;
+    // l.insert(14, method::push_front);
+    // l.insert(a, method::push_front);
+
+    // std::cout << l << std::endl;
+    // std::cout << ol << std::endl;
+>>>>>>> 7e90c104ac43c8a79725b69b84791df7716d447d
 
   } catch (std::exception& e) {
     std::cerr << e.what() << std::endl;
