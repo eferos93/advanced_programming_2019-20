@@ -1,8 +1,12 @@
 EXE = ap
 GDIR=../01_greetings_library
 
+#link phase
+# -lname_of_library -L path_to_library
+# 
+# export LD_LIBRARY_PATH=path_to_library:$LD_LIBRARY_PATH
 LDFLAGS = -lgreetings -L $(GDIR)
-CXX = c++
+CXX = c++lgreetings
 CXXFLAGS = -I include -I $(GDIR)/include -std=c++11
 
 all: $(EXE)
