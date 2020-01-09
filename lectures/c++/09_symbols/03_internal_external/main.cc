@@ -3,6 +3,9 @@
 
 double area_circle(const double);
 double golden_ratio(const double);
+//have to do set this as circle_conter is defined in a different compilation unit
+//namely circle.cc
+//extern means: the symbol is defined in a different compilation unit (the linker will find it)
 extern int circle_counter;
 
 int main() {
