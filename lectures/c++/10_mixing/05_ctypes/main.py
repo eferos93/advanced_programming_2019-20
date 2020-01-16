@@ -10,6 +10,8 @@ dso.hello()
 ## strings
 dso.repeat.argtypes = [c_char_p]
 dso.repeat.restype = c_int
+#you have to use b in front of strings, always.
+#because in py strings are immutable
 res = dso.repeat(b"ctypes are great") # use b to pass read-only variable
 
 # use create_string_buffer for a "mutable string"
